@@ -12,12 +12,12 @@ package vue;
  *
  * @author btssio
  */
-public class gestionCompteRendu extends javax.swing.JPanel {
+public class VueGestionCompteRendu extends javax.swing.JPanel {
 
     /**
      * Creates new form gestionCompteRendu
      */
-    public gestionCompteRendu() {
+    public VueGestionCompteRendu() {
         initComponents();
     }
 

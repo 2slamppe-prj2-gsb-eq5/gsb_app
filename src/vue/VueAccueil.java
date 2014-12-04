@@ -14,7 +14,7 @@ import javax.swing.JFrame;
  *
  * @author btssio
  */
-public class NewJPanel extends javax.swing.JPanel {
+public class VueAccueil extends javax.swing.JPanel {
     
     /**
      * This method is called from within the constructor to initialize the form.

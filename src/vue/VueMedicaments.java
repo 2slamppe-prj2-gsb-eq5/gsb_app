@@ -12,12 +12,12 @@ package vue;
  *
  * @author btssio
  */
-public class Medicaments extends javax.swing.JPanel {
+public class VueMedicaments extends javax.swing.JPanel {
 
     /**
      * Creates new form Medicaments
      */
-    public Medicaments() {
+    public VueMedicaments() {
         initComponents();
     }
 

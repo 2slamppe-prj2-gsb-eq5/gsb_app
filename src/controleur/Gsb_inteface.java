@@ -1,4 +1,4 @@
-package gsb_app;
+package controleur;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

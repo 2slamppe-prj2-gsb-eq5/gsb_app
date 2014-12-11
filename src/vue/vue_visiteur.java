@@ -6,7 +6,10 @@
 
 package vue;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modele.dao.DAO_utilisateurs;
 import modele.metier.Utilisateur;
 
@@ -21,12 +24,18 @@ public class vue_visiteur extends javax.swing.JFrame {
     public vue_visiteur() {
         initComponents();
         this.setVisible(true);
-        telechargeVisiteur();
+        try {
+            telechargeVisiteur();
+        } catch (SQLException ex) {
+            Logger.getLogger(vue_visiteur.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    private ArrayList<Utilisateur> telechargeVisiteur(){
+    private ArrayList<Utilisateur> telechargeVisiteur() throws SQLException{
         
         DAO_utilisateurs utilisateurs = new DAO_utilisateurs();
+        
+        listeVisiteurs = utilisateurs.listeUtilisateur();
         
         return null;
         
@@ -223,6 +232,9 @@ public class vue_visiteur extends javax.swing.JFrame {
 
     private void jcbListeVisiteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListeVisiteurActionPerformed
         // TODO add your handling code here:
+        for (Utilisateur listeVisiteur : listeVisiteurs) {
+            
+        }
         
     }//GEN-LAST:event_jcbListeVisiteurActionPerformed
 

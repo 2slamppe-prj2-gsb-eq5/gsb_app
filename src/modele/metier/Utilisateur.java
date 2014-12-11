@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
-package test.modele.metier;
+package modele.metier;
+
+import test.modele.metier.*;
 
 /**
  *

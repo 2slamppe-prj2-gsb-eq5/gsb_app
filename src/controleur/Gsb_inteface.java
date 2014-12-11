@@ -1,6 +1,8 @@
 package controleur;
 
 import modele.dao.Connexion;
+import modele.dao.DAO_utilisateurs;
+import vue.vue_visiteur;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,7 +22,7 @@ public class Gsb_inteface {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Connexion con = new Connexion();
+        DAO_utilisateurs utilisateur = new DAO_utilisateurs();
     }
     
 }

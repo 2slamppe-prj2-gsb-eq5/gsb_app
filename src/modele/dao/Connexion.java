@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class Connexion {
  
-    public Connexion(){
+    public Connection Connexion(){
         System.out.println("-------- Oracle JDBC Connection Testing ------");
  
 		try {
@@ -27,7 +27,7 @@ public class Connexion {
  
 			System.out.println("Where is your Oracle JDBC Driver?");
 			e.printStackTrace();
-			return;
+			return Connexion();
  
 		}
  
@@ -45,7 +45,7 @@ public class Connexion {
  
 			System.out.println("Connection Failed! Check output console");
 			e.printStackTrace();
-			return;
+			return connection;
  
 		}
  
@@ -54,6 +54,7 @@ public class Connexion {
 		} else {
 			System.out.println("Failed to make connection!");
 		}
+                return connection;
 	}
         
     }       

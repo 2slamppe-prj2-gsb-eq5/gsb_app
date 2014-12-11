@@ -10,6 +10,6 @@ package test.modele.dao;
  *
  * @author btssio
  */
-public class NewClass {
+public class testDAO_utilisateurs {
     
 }

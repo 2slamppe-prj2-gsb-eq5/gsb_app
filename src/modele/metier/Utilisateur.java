@@ -6,8 +6,6 @@
 
 package modele.metier;
 
-import test.modele.metier.*;
-
 /**
  *
  * @author btssio

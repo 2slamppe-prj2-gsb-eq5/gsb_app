@@ -36,6 +36,8 @@ public class vue_visiteur extends javax.swing.JFrame {
         DAO_utilisateurs utilisateurs = new DAO_utilisateurs();
         
         listeVisiteurs = utilisateurs.listeUtilisateur();
+        String sdsd = "ccoucou";
+        jcbListeVisiteur.addItem(sdsd);
         
         return null;
         

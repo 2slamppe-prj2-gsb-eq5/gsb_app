@@ -1,6 +1,5 @@
 package controleur;
 
-import modele.dao.Connexion;
 import modele.dao.DAO_utilisateurs;
 import vue.vue_visiteur;
 

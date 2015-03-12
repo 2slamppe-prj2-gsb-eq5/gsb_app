@@ -1,6 +1,8 @@
 package controleur;
 
 import modele.dao.DAO_utilisateurs;
+import vue.VueRapportVisite;
+import vue.vue_praticiens;
 import vue.vue_visiteur;
 
 /*
@@ -21,7 +23,7 @@ public class Gsb_inteface {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        vue_visiteur afficher = new vue_visiteur();
+        VueRapportVisite rapportVisite = new VueRapportVisite();
     }
     
 }

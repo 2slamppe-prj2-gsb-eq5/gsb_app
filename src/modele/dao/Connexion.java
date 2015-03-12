@@ -16,6 +16,9 @@ import java.sql.SQLException;
  */
 public class Connexion {
  
+    public Connexion(){
+        
+    }
     public Connection Connexion(){
         System.out.println("-------- Oracle JDBC Connection Testing ------");
  

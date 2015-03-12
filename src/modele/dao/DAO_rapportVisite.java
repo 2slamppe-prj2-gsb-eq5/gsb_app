@@ -37,7 +37,7 @@ public class DAO_rapportVisite {
             
             
             java.util.Date dates;
-            dates = formateDate("2013-02-01");
+            dates = formateDate(date);
             long t = dates.getTime();
             java.sql.Date sqlDate = new java.sql.Date(t);
       
@@ -56,7 +56,7 @@ public class DAO_rapportVisite {
     
     private Date formateDate(String date){
         
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateInString = date;
  
             
@@ -68,7 +68,6 @@ public class DAO_rapportVisite {
         } catch (ParseException ex) {
             Logger.getLogger(DAO_rapportVisite.class.getName()).log(Level.SEVERE, null, ex);
         }
-		System.out.println(date);
         
         return datetest;
     }

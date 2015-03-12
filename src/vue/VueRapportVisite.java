@@ -67,7 +67,7 @@ public class VueRapportVisite extends javax.swing.JFrame {
         }
         
         try {
-            rapportVisite.newRapportVisite(15, num, "2002-02-04", jtfMotif.getText(), jTextArea2.getText());
+            rapportVisite.newRapportVisite(15, num, tfdDate.getText(), jtfMotif.getText(), jTextArea2.getText());
         } catch (SQLException ex) {
             Logger.getLogger(VueRapportVisite.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,8 +109,7 @@ public class VueRapportVisite extends javax.swing.JFrame {
         jLabel2.setText("Numéro Rapport");
         jLabel2.setEnabled(false);
 
-        numRapport.setText("00");
-        numRapport.setEnabled(true);
+        numRapport.setEditable(false);
         numRapport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numRapportActionPerformed(evt);
@@ -174,7 +173,7 @@ public class VueRapportVisite extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(numRapport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(numRapport, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)

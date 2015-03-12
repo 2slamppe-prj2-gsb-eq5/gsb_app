@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vue;
 
 import java.awt.event.ActionEvent;
@@ -26,12 +25,12 @@ public class vue_visiteur extends javax.swing.JFrame {
     private ArrayList<Utilisateur> listeVisiteurs;
     private int index = 0;
     private String codeLibelle;
-    
+
     public vue_visiteur() {
         initComponents();
         this.setVisible(true);
         afficheVisiteur();
-        
+
         /*Fermer la fenêtre active*/
         jButtonQuitter.addActionListener(new ActionListener() {
             @Override
@@ -41,25 +40,26 @@ public class vue_visiteur extends javax.swing.JFrame {
             }
         });
     }
-    
-    private ArrayList<Utilisateur> telechargeVisiteur() throws SQLException{
+
+    private ArrayList<Utilisateur> telechargeVisiteur() throws SQLException {
         DAO_utilisateurs utilisateurs = new DAO_utilisateurs();
         listeVisiteurs = utilisateurs.listeUtilisateur();
         return listeVisiteurs;
     }
-    
-    private void afficheVisiteur(){
+
+    private void afficheVisiteur() {
         try {
             listeVisiteurs = telechargeVisiteur();
         } catch (SQLException ex) {
             Logger.getLogger(vue_visiteur.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (Utilisateur unVisiteur : listeVisiteurs) {
-            
+
             jcbListeVisiteur.addItem(unVisiteur.getPrenom());
-            
+
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -267,42 +267,61 @@ public class vue_visiteur extends javax.swing.JFrame {
 
     private void jcbListeVisiteurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbListeVisiteurMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jcbListeVisiteurMouseClicked
 
     private void jcbListeVisiteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListeVisiteurActionPerformed
-        jcbListeVisiteur = (JComboBox)evt.getSource();
-        String name = (String)jcbListeVisiteur.getSelectedItem();
+        jcbListeVisiteur = (JComboBox) evt.getSource();
+        String name = (String) jcbListeVisiteur.getSelectedItem();
         findUserName(name);
     }//GEN-LAST:event_jcbListeVisiteurActionPerformed
 
     private void jButtonSuivantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuivantActionPerformed
         // TODO add your handling code here:
-        Utilisateur util = listeVisiteurs.get(index+1);
-        ecrireVisiteur(util);
+        if (listeVisiteurs.size() > index + 1) {
+            Utilisateur util = listeVisiteurs.get(index + 1);
+            ecrireVisiteur(util);
+        } else {
+            index = 0;
+            Utilisateur util = listeVisiteurs.get(index);
+            ecrireVisiteur(util);
+        }
+
+
     }//GEN-LAST:event_jButtonSuivantActionPerformed
 
     private void jButtonPrecedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrecedentActionPerformed
         // TODO add your handling code here:
-        Utilisateur util = listeVisiteurs.get(index-1);
-        ecrireVisiteur(util);
+        if (index > 0) {
+            Utilisateur util = listeVisiteurs.get(index - 1);
+            ecrireVisiteur(util);
+            System.out.println("index=" + index);
+            System.out.println("size=" + listeVisiteurs.size());
+        } else {
+            index = listeVisiteurs.size()-1;
+            Utilisateur util = listeVisiteurs.get(index);
+            ecrireVisiteur(util);
+        }
+        
     }//GEN-LAST:event_jButtonPrecedentActionPerformed
-    
-    private void findUserName(String name){
+
+    private void findUserName(String name) {
         for (Utilisateur unVisiteur : listeVisiteurs) {
-            if(unVisiteur.getPrenom().equals(name)){
+            if (unVisiteur.getPrenom().equals(name)) {
                 ecrireVisiteur(unVisiteur);
             }
         }
     }
-        private void ecrireVisiteur(Utilisateur util){
-            jtfAdresse.setText(util.getAdresse());
-            jtfCp.setText(util.getCP());
-            jtfNom.setText(util.getNom());
-            jtfPrenom.setText(util.getPrenom());
-            jtfVille.setText(util.getVille());
-            index = listeVisiteurs.indexOf(util);
-        }
+
+    private void ecrireVisiteur(Utilisateur util) {
+        jtfAdresse.setText(util.getAdresse());
+        jtfCp.setText(util.getCP());
+        jtfNom.setText(util.getNom());
+        jtfPrenom.setText(util.getPrenom());
+        jtfVille.setText(util.getVille());
+        index = listeVisiteurs.indexOf(util);
+    }
+
     /**
      * @param args the command line arguments
      */

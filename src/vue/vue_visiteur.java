@@ -297,8 +297,8 @@ public class vue_visiteur extends javax.swing.JFrame {
             ecrireVisiteur(util);
             System.out.println("index=" + index);
             System.out.println("size=" + listeVisiteurs.size());
-        } else if (index==0) {
-            index = listeVisiteurs.size();
+        } else {
+            index = listeVisiteurs.size()-1;
             Utilisateur util = listeVisiteurs.get(index);
             ecrireVisiteur(util);
         }

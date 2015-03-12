@@ -21,7 +21,7 @@ public class Gsb_inteface {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DAO_utilisateurs utilisateur = new DAO_utilisateurs();
+        vue_visiteur afficher = new vue_visiteur();
     }
     
 }

@@ -21,34 +21,78 @@ import modele.metier.Utilisateur;
 public class DAO_utilisateurs extends Connexion {
     
     public DAO_utilisateurs(){
-        try {
-            listeUtilisateur();
-        } catch (SQLException ex) {
-            Logger.getLogger(DAO_utilisateurs.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
     
     public ArrayList<Utilisateur> listeUtilisateur() throws SQLException{
         
             ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
-            Connection connection = null;
-            connection = Connexion();
-            Statement vSt = connection.createStatement();
+            Connexion con = new Connexion();
+            Statement vSt = con.Connexion().createStatement();
             // Requête de sélection
-            ResultSet vRs = vSt.executeQuery("SELECT v.VIS_MATRICULE, v.VIS_NOM, v.VIS_PRENOM, v.VIS_ADRESSE, v.VIS_CP, v.VIS_VILLE, v.SEC_CODE v.LAB_CODE FROM VISITEUR v");
+            ResultSet vRs = vSt.executeQuery("SELECT v.VIS_PRENOM, VIS_NOM, VIS_ADRESSE, VIS_CP, VIS_VILLE, SEC_CODE, LAB_CODE FROM VISITEUR v");
             while(vRs.next()){
-            Utilisateur user = new Utilisateur();
-            String matricule = vRs.getString(1);
-            String nom = vRs.getString(2);
-            String prenom = vRs.getString(3);
-            String adresse = vRs.getString(4);
-            String cp = vRs.getString(5);
-            String ville = vRs.getString(6);
-            String secCode = vRs.getString(7);
-            String labCode = vRs.getString(8);
-            utilisateurs.add(user);
+                Utilisateur user = new Utilisateur();
+
+                String prenom = vRs.getString(1);
+                user.setPrenom(prenom);
+                
+                String nom = vRs.getString(2);
+                user.setNom(nom);
+                
+                String adresse = vRs.getString(3);
+                user.setAdresse(adresse);
+                
+                String cp = vRs.getString(4);
+                user.setCP(cp);
+                
+                String ville = vRs.getString(5);
+                user.setVille(ville);
+                
+                String code = vRs.getString(6);
+                user.setLabCode(code);
+                
+                String labo = vRs.getString(7);
+                user.setLabCode(labo);
+
+                utilisateurs.add(user);
             
-        }
+            }
             return utilisateurs;
+    }
+    
+    public String libelleSecCode(String secCode) throws SQLException{
+        
+            String libelleSecCode = "";
+            Connexion con = new Connexion();
+            Statement vSt = con.Connexion().createStatement();
+            // Requête de sélection
+            ResultSet vRs = vSt.executeQuery("SELECT v.VIS_PRENOM, VIS_NOM, VIS_ADRESSE, VIS_CP, VIS_VILLE, SEC_CODE, LAB_CODE FROM VISITEUR v");
+            while(vRs.next()){
+                Utilisateur user = new Utilisateur();
+
+                String prenom = vRs.getString(1);
+                user.setPrenom(prenom);
+                
+                String nom = vRs.getString(2);
+                user.setNom(nom);
+                
+                String adresse = vRs.getString(3);
+                user.setAdresse(adresse);
+                
+                String cp = vRs.getString(4);
+                user.setCP(cp);
+                
+                String ville = vRs.getString(5);
+                user.setVille(ville);
+                
+                String code = vRs.getString(6);
+                user.setLabCode(code);
+                
+                String labo = vRs.getString(7);
+                user.setLabCode(labo);
+            
+            }
+            return libelleSecCode;
     }
 }

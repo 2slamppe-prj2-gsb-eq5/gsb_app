@@ -6,12 +6,16 @@
 
 package vue;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import modele.dao.DAO_utilisateurs;
 import modele.metier.Utilisateur;
+import static oracle.sql.NUMBER.e;
 
 /**
  *
@@ -20,27 +24,41 @@ import modele.metier.Utilisateur;
 public class vue_visiteur extends javax.swing.JFrame {
 
     private ArrayList<Utilisateur> listeVisiteurs;
+    private int index = 0;
+    private String codeLibelle;
     
     public vue_visiteur() {
         initComponents();
         this.setVisible(true);
-        try {
-            telechargeVisiteur();
-        } catch (SQLException ex) {
-            Logger.getLogger(vue_visiteur.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        afficheVisiteur();
+        
+        /*Fermer la fenêtre active*/
+        jButtonQuitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
     
     private ArrayList<Utilisateur> telechargeVisiteur() throws SQLException{
-        
         DAO_utilisateurs utilisateurs = new DAO_utilisateurs();
-        
         listeVisiteurs = utilisateurs.listeUtilisateur();
-        String sdsd = "ccoucou";
-        jcbListeVisiteur.addItem(sdsd);
-        
-        return null;
-        
+        return listeVisiteurs;
+    }
+    
+    private void afficheVisiteur(){
+        try {
+            listeVisiteurs = telechargeVisiteur();
+        } catch (SQLException ex) {
+            Logger.getLogger(vue_visiteur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (Utilisateur unVisiteur : listeVisiteurs) {
+            
+            jcbListeVisiteur.addItem(unVisiteur.getPrenom());
+            
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,14 +74,14 @@ public class vue_visiteur extends javax.swing.JFrame {
         jcbListeVisiteur = new javax.swing.JComboBox();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldNom = new javax.swing.JTextField();
+        jtfNom = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldPrenom = new javax.swing.JTextField();
-        jTextFieldAdresse = new javax.swing.JTextField();
+        jtfPrenom = new javax.swing.JTextField();
+        jtfAdresse = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldCp = new javax.swing.JTextField();
-        jTextFieldVille = new javax.swing.JTextField();
+        jtfCp = new javax.swing.JTextField();
+        jtfVille = new javax.swing.JTextField();
         jcbSec = new javax.swing.JComboBox();
         jcbLab = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
@@ -78,8 +96,12 @@ public class vue_visiteur extends javax.swing.JFrame {
 
         jLabel1.setText("Chercher ");
 
-        jcbListeVisiteur.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbListeVisiteur.setName(""); // NOI18N
+        jcbListeVisiteur.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbListeVisiteurMouseClicked(evt);
+            }
+        });
         jcbListeVisiteur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbListeVisiteurActionPerformed(evt);
@@ -88,21 +110,21 @@ public class vue_visiteur extends javax.swing.JFrame {
 
         jLabel2.setText("NOM");
 
-        jTextFieldNom.setText("VilleChalane");
+        jtfNom.setText("VilleChalane");
 
         jLabel3.setText("PRENOM");
 
-        jTextFieldPrenom.setText("Louis");
+        jtfPrenom.setText("Louis");
 
-        jTextFieldAdresse.setText("8 cours laFontaine");
+        jtfAdresse.setText("8 cours laFontaine");
 
         jLabel4.setText("ADRESSE");
 
         jLabel5.setText("VILLE");
 
-        jTextFieldCp.setText("29000");
+        jtfCp.setText("29000");
 
-        jTextFieldVille.setText("BREST");
+        jtfVille.setText("BREST");
 
         jcbSec.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbSec.addActionListener(new java.awt.event.ActionListener() {
@@ -118,8 +140,18 @@ public class vue_visiteur extends javax.swing.JFrame {
         jLabel7.setText("LABO");
 
         jButtonPrecedent.setText("Précédent");
+        jButtonPrecedent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrecedentActionPerformed(evt);
+            }
+        });
 
         jButtonSuivant.setText("Suivant");
+        jButtonSuivant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSuivantActionPerformed(evt);
+            }
+        });
 
         jButtonQuitter.setText("Quitter");
 
@@ -153,12 +185,12 @@ public class vue_visiteur extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextFieldCp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfCp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldVille, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfVille, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfNom, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbListeVisiteur, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -183,20 +215,20 @@ public class vue_visiteur extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextFieldPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextFieldAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextFieldCp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldVille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfCp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfVille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbSec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,14 +265,44 @@ public class vue_visiteur extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbSecActionPerformed
 
-    private void jcbListeVisiteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListeVisiteurActionPerformed
+    private void jcbListeVisiteurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbListeVisiteurMouseClicked
         // TODO add your handling code here:
-        for (Utilisateur listeVisiteur : listeVisiteurs) {
-            
-        }
         
+    }//GEN-LAST:event_jcbListeVisiteurMouseClicked
+
+    private void jcbListeVisiteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListeVisiteurActionPerformed
+        jcbListeVisiteur = (JComboBox)evt.getSource();
+        String name = (String)jcbListeVisiteur.getSelectedItem();
+        findUserName(name);
     }//GEN-LAST:event_jcbListeVisiteurActionPerformed
 
+    private void jButtonSuivantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuivantActionPerformed
+        // TODO add your handling code here:
+        Utilisateur util = listeVisiteurs.get(index+1);
+        ecrireVisiteur(util);
+    }//GEN-LAST:event_jButtonSuivantActionPerformed
+
+    private void jButtonPrecedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrecedentActionPerformed
+        // TODO add your handling code here:
+        Utilisateur util = listeVisiteurs.get(index-1);
+        ecrireVisiteur(util);
+    }//GEN-LAST:event_jButtonPrecedentActionPerformed
+    
+    private void findUserName(String name){
+        for (Utilisateur unVisiteur : listeVisiteurs) {
+            if(unVisiteur.getPrenom().equals(name)){
+                ecrireVisiteur(unVisiteur);
+            }
+        }
+    }
+        private void ecrireVisiteur(Utilisateur util){
+            jtfAdresse.setText(util.getAdresse());
+            jtfCp.setText(util.getCP());
+            jtfNom.setText(util.getNom());
+            jtfPrenom.setText(util.getPrenom());
+            jtfVille.setText(util.getVille());
+            index = listeVisiteurs.indexOf(util);
+        }
     /**
      * @param args the command line arguments
      */
@@ -290,13 +352,13 @@ public class vue_visiteur extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextFieldAdresse;
-    private javax.swing.JTextField jTextFieldCp;
-    private javax.swing.JTextField jTextFieldNom;
-    private javax.swing.JTextField jTextFieldPrenom;
-    private javax.swing.JTextField jTextFieldVille;
     private javax.swing.JComboBox jcbLab;
     private javax.swing.JComboBox jcbListeVisiteur;
     private javax.swing.JComboBox jcbSec;
+    private javax.swing.JTextField jtfAdresse;
+    private javax.swing.JTextField jtfCp;
+    private javax.swing.JTextField jtfNom;
+    private javax.swing.JTextField jtfPrenom;
+    private javax.swing.JTextField jtfVille;
     // End of variables declaration//GEN-END:variables
 }

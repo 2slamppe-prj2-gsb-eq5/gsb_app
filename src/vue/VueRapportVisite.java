@@ -57,8 +57,9 @@ public class VueRapportVisite extends javax.swing.JFrame {
     
     private void insertRapportVisite(){
         DAO_rapportVisite rapportVisite = new DAO_rapportVisite();
-        int num = 0;
-        for(Praticiens praticiens : listePraticiens){
+        int num = 0; //Num du praticiens
+        
+        for(Praticiens praticiens : listePraticiens){//Recherche du praticiens selectionné
             String nomPrenom = praticiens.getNom()+" "+praticiens.getPrenom();
             if(nomPrenom.equals(jcbPraticiens.getSelectedItem().toString())){
                 num = praticiens.getNum();
@@ -108,8 +109,8 @@ public class VueRapportVisite extends javax.swing.JFrame {
         jLabel2.setText("Numéro Rapport");
         jLabel2.setEnabled(false);
 
-        numRapport.setText("11");
-        numRapport.setEnabled(false);
+        numRapport.setText("00");
+        numRapport.setEnabled(true);
         numRapport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numRapportActionPerformed(evt);

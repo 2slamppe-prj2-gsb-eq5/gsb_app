@@ -9,7 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modele.metier.Praticiens;
 import modele.metier.Utilisateur;
 
@@ -29,8 +34,10 @@ public class DAO_rapportVisite {
             String requete = "INSERT INTO RAPPORT_VISITE " + "VALUES (?,?,?,?,?,?)";
             PreparedStatement ps = con.Connexion().prepareStatement(requete);
             
+            
+            
             java.util.Date dates;
-            dates = new java.util.Date();
+            dates = formateDate("2013-02-01");
             long t = dates.getTime();
             java.sql.Date sqlDate = new java.sql.Date(t);
       
@@ -43,6 +50,27 @@ public class DAO_rapportVisite {
             // etc - there is a setter for each basic datatype
             ps.execute();
             ps.close();
+
+
+    }
+    
+    private Date formateDate(String date){
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        String dateInString = date;
+ 
+            
+ 
+		Date datetest = null;
+        try {
+            datetest = formatter.parse(dateInString);
+            System.out.println(datetest);
+        } catch (ParseException ex) {
+            Logger.getLogger(DAO_rapportVisite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		System.out.println(date);
+        
+        return datetest;
     }
     
     public String libelleSecCode(String secCode) throws SQLException{

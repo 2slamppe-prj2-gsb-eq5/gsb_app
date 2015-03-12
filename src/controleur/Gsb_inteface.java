@@ -2,6 +2,7 @@ package controleur;
 
 import modele.dao.DAO_utilisateurs;
 import vue.VueRapportVisite;
+import vue.vue_choix;
 import vue.vue_praticiens;
 import vue.vue_visiteur;
 
@@ -23,7 +24,7 @@ public class Gsb_inteface {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        VueRapportVisite rapportVisite = new VueRapportVisite();
+        vue_choix choix = new vue_choix();
     }
     
 }

@@ -24,12 +24,15 @@ public class DAO_praticiens {
     
     public ArrayList<Praticiens> listePraticiens() throws SQLException{
         
-            ArrayList<Praticiens> praticiens = new ArrayList<>();
-            Connexion con = new Connexion();
+            ArrayList<Praticiens> praticiens = new ArrayList<>();//Liste de praticiens 
+            Connexion con = new Connexion(); //Connection a la base
             Statement vSt = con.Connexion().createStatement();
             // Requête de sélection
-            ResultSet vRs = vSt.executeQuery("SELECT p.PRA_NOM, p.PRA_PRENOM, PRA_NUM FROM PRATICIEN p");
+            ResultSet vRs = vSt.executeQuery("SELECT p.PRA_NOM, p.PRA_PRENOM, PRA_NUM FROM PRATICIEN p"); //Exucution de la requete
+            
+            //Parcour de la réponse
             while(vRs.next()){
+                //On enregistre les praticiens
                 Praticiens praticien = new Praticiens();
 
                 String nom = vRs.getString(1);

@@ -189,6 +189,9 @@
     <Component class="javax.swing.JFormattedTextField" name="tfdDate">
     </Component>
     <Component class="javax.swing.JTextField" name="jtfMotif">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfMotifActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPrecedent">
       <Properties>

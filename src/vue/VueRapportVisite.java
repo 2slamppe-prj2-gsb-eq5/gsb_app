@@ -127,6 +127,12 @@ public class VueRapportVisite extends javax.swing.JFrame {
 
         jLabel7.setText("BILAN");
 
+        jtfMotif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfMotifActionPerformed(evt);
+            }
+        });
+
         btnPrecedent.setText("Précédent");
 
         btnSuivant.setText("Suivant");
@@ -262,6 +268,10 @@ public class VueRapportVisite extends javax.swing.JFrame {
         // TODO add your handling code here:
         insertRapportVisite();
     }//GEN-LAST:event_btnNewActionPerformed
+
+    private void jtfMotifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfMotifActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfMotifActionPerformed
 
     /**
      * @param args the command line arguments

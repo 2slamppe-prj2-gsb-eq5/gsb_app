@@ -55,7 +55,7 @@ public class vue_visiteur extends javax.swing.JFrame {
         }
         for (Utilisateur unVisiteur : listeVisiteurs) {
 
-            jcbListeVisiteur.addItem(unVisiteur.getPrenom());
+            jcbListeVisiteur.addItem(unVisiteur.getPrenom()+" "+unVisiteur.getNom());
 
         }
     }
@@ -295,8 +295,6 @@ public class vue_visiteur extends javax.swing.JFrame {
         if (index > 0) {
             Utilisateur util = listeVisiteurs.get(index - 1);
             ecrireVisiteur(util);
-            System.out.println("index=" + index);
-            System.out.println("size=" + listeVisiteurs.size());
         } else {
             index = listeVisiteurs.size()-1;
             Utilisateur util = listeVisiteurs.get(index);

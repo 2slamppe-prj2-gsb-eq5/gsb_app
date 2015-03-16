@@ -273,6 +273,9 @@ public class vue_visiteur extends javax.swing.JFrame {
     private void jcbListeVisiteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListeVisiteurActionPerformed
         jcbListeVisiteur = (JComboBox) evt.getSource();
         String name = (String) jcbListeVisiteur.getSelectedItem();
+        int indexof = name.indexOf(" ");
+        name = name.substring(0, indexof);
+        System.out.println(name);
         findUserName(name);
     }//GEN-LAST:event_jcbListeVisiteurActionPerformed
 

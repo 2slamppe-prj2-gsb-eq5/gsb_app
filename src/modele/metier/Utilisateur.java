@@ -6,8 +6,6 @@
 
 package modele.metier;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author btssio

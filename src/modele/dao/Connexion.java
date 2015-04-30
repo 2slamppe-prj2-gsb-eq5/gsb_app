@@ -41,8 +41,8 @@ public class Connexion {
 		try {
  
 			connection = DriverManager.getConnection(
-					"jdbc:oracle:thin:@localhost:1521:XE", "GSB",
-					"GSB");
+					"jdbc:oracle:thin:@172.15.11.102:1521:orcl", "rjumbou",
+					"RJUMBOU");
  
 		} catch (SQLException e) {
  

@@ -55,7 +55,7 @@ public class vue_visiteur extends javax.swing.JFrame {
         }
         for (Utilisateur unVisiteur : listeVisiteurs) {
 
-            jcbListeVisiteur.addItem(unVisiteur.getPrenom());
+            jcbListeVisiteur.addItem(unVisiteur.getPrenom()+" "+unVisiteur.getNom());
 
         }
     }
@@ -273,6 +273,9 @@ public class vue_visiteur extends javax.swing.JFrame {
     private void jcbListeVisiteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListeVisiteurActionPerformed
         jcbListeVisiteur = (JComboBox) evt.getSource();
         String name = (String) jcbListeVisiteur.getSelectedItem();
+        int indexof = name.indexOf(" ");
+        name = name.substring(0, indexof);
+        System.out.println(name);
         findUserName(name);
     }//GEN-LAST:event_jcbListeVisiteurActionPerformed
 
@@ -295,8 +298,6 @@ public class vue_visiteur extends javax.swing.JFrame {
         if (index > 0) {
             Utilisateur util = listeVisiteurs.get(index - 1);
             ecrireVisiteur(util);
-            System.out.println("index=" + index);
-            System.out.println("size=" + listeVisiteurs.size());
         } else {
             index = listeVisiteurs.size()-1;
             Utilisateur util = listeVisiteurs.get(index);
